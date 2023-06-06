@@ -8,7 +8,7 @@ class Program
     static void Main(string[] args)
     {
         
-
+        //exception handling
         try
         {
             // Getting Text File Path
@@ -38,6 +38,7 @@ class Program
         }
         catch (Exception ex)
         {
+            //Showing the error message
             Console.WriteLine("Error : Please check the file path again !   : " + ex.Message);
         }
 
@@ -47,13 +48,17 @@ class Program
     // Getting Word Frequency
     static Dictionary<string, int> GetWordFrequency(string filePath)
     {
+        // Reading the file
         string text = File.ReadAllText(filePath);
+
+        // Splitting the text into words
         string[] words = text.Split(new[] { ' ', '\t', '\n', '\r', ',', '.', ';', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
         Dictionary<string, int> wordFrequencies = new Dictionary<string, int>();
 
         foreach (string word in words)
         {
+            // Converting the word to lowercase
             string lowercaseWord = word.ToLower();
             if (wordFrequencies.ContainsKey(lowercaseWord))
             {
@@ -68,6 +73,7 @@ class Program
         return wordFrequencies;
     }
 
+    //Getting Top N Words
     static IEnumerable<KeyValuePair<string, int>> GetTopNWords(Dictionary<string, int> wordFrequencies, int n)
     {
         return wordFrequencies
